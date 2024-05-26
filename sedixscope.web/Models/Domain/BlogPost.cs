@@ -16,10 +16,9 @@ namespace sedixscope.web.Models.Domain
         public string UrlHandle { get; set; }
         public DateTime DatePublished { get; set; }
         public string Author { get; set; }
-
-        public IEnumerable<Comment> Comments { get; set; }
-        public int TotalLikes { get; set; }
-        public IEnumerable<Tag> Tags { get; set; }
-
+        public bool Visible { get; set; }
+        public ICollection<Tag> Tags { get; set; }
+        public ICollection<Comment> Comments { get; set; }
+        public ICollection<BlogLike> Likes { get; set; }
     }
 }
