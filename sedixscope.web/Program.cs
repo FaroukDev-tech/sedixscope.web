@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using sedixscope.web.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<SedixDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("SedixScopeDbConnectionString"))
+);
 
 var app = builder.Build();
 
