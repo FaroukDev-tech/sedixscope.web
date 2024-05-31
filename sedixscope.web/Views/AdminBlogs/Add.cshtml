@@ -1,12 +1,12 @@
 @model sedixscope.web.Models.ViewModels.AddBlogPostRequest
 
 <div class="bg-secondary bg-opacity-10 py-2">
-    <div class="container">
+    <div class="container-fluid">
         <h1>Add New Blog Post - Admin Functionality</h1>
     </div>
 </div>
 
-<div class="container py-5">
+<div class="container-fluid py-5">
     <form method="post" >
         <div class="mb-3">
             <label for="" class="form-label">Heading</label>
@@ -61,7 +61,7 @@
 
         <div class="mb-3">
             <label for="" class="form-label me-1">Visible?</label>
-            <input type="checkbox" class="form-check-input" id="visible" asp-for="Visible"/>
+            <input type="checkbox" class="form-check-input" id="visible" checked asp-for="Visible"/>
         </div>
 
         <div class="mt-3">

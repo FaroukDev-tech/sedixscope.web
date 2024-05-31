@@ -1,5 +1,62 @@
-﻿@{
+﻿@model sedixscope.web.Models.ViewModels.HomeViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
+<div class="container py-5">
+    <div class="row align-items-center justify-content-center g-5 py-5">
+        <div class="col-12 col-lg-5">
+            <h1 class="display-5 fw-bold lh-1 mb-3">
+                SedixScope - The Dev Blogs
+            </h1>
+            <p>
+                SedixScope is the home to coding blogs covering a vast range of topics like HTML, CSS, Javascript, ASP.Net,
+                C#, React, Django, etc.
+                <br/>
+                Want to read the latest dev articles? Join the SedixScope app and get weekly blogs in your email.
+            </p>
+        </div>
 
+        <div class="col-12 col-lg-6">
+            <img src="https://th.bing.com/th/id/R.6b960e9bfd4dfa87be3b4db9270e0f4d?rik=liZwxSywJoVtCA&pid=ImgRaw&r=0" 
+                alt="SedixScope" class="d-block mx-lg-auto img-fluid" width="450">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-7">
+            @if (Model != null && Model.BlogPosts.Any())
+            {
+                @foreach (var blogPost in Model.BlogPosts)
+                {
+                    <div class="mb-5 bg-light box-shadow p-3">
+                        <img src="@blogPost.FeaturedImageUrl" alt="@blogPost.Heading">
+                        <h2 class="mb-4">@blogPost.Heading</h2>
+                        <p class="mb-4">
+                            Author: @blogPost.Author
+                            <br/>
+                            Published Date: @blogPost.DatePublished.ToShortDateString()
+                        </p>
+
+                        <p class="mb-4">
+                            @foreach (var tag in blogPost.Tags)
+                            {
+                                <span class="badge bg-secondaryme-1">@tag.Name</span>
+                            }
+                        </p>
+
+                        <p class="mb-4">@blogPost.ShortDescription</p>
+                        <a class="btn btn-dark" asp-area="" asp-controller="BlogPosts" asp-action="Detail">Read more</a>
+                    </div>
+                }
+            }
+            else 
+            {
+                <p>No Blog Posts yet!</p>
+            }
+        </div>
+    </div>
+</div>
