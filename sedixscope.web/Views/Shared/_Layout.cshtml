@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/sedixscope.web.styles.css" asp-append-version="true" />
+
+    <!-- Froala WYSIWYG Editor CDN -->
+    <link href="node_modules/froala-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
 </head>
 <body>
     <header>
@@ -29,7 +33,7 @@
                                 </button>
 
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Add Blog Post</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="AdminBlogs" asp-action="Add">Add Blog Post</a></li>
                                     <li><a class="dropdown-item" href="#">View All Blog Posts</a></li>
                                     <li><a class="dropdown-item" href="#">Add Tag</a></li>
                                     <li><a class="dropdown-item" href="#">View All Tags</a></li>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using sedixscope.web.Models.Domain;
 using sedixscope.web.Models.ViewModels;
 using sedixscope.web.Repository;
@@ -11,18 +12,24 @@ namespace sedixscope.web.Controllers
 {
     public class AdminBlogsController : Controller
     {
-        private readonly BlogPostRepository _blogPostRepository;
-        private readonly TagRepository _tagRepository;
-        public AdminBlogsController(BlogPostRepository blogPostRepository, TagRepository tagRepository)
+        private readonly IBlogPostRepository _blogPostRepository;
+        private readonly ITagRepository _tagRepository;
+        public AdminBlogsController(IBlogPostRepository blogPostRepository, ITagRepository tagRepository)
         {
             _blogPostRepository = blogPostRepository;
             _tagRepository = tagRepository;
         }
 
         [HttpGet]
-        public Task<IActionResult> Add()
+        public async Task<IActionResult> Add()
         {
-            return View();
+            var tags = await _tagRepository.GetAllAsync();
+            var model = new AddBlogPostRequest
+            {
+                Tags = tags.Select(x => new SelectListItem {Value = x.Name, Text = x.DisplayName})
+            };
+
+            return View(model);
         }
 
         [HttpPost]

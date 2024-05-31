@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using sedixscope.web.Data;
+using sedixscope.web.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<SedixDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("SedixScopeDbConnectionString"))
 );
+
+builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
+builder.Services.AddScoped<ITagRepository, TagRepository>();
 
 var app = builder.Build();
 
