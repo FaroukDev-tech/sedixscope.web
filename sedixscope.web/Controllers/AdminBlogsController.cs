@@ -67,5 +67,13 @@ namespace sedixscope.web.Controllers
 
             return RedirectToAction("Add");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            var blogPosts = await _blogPostRepository.GetAllAsync();
+
+            return View(blogPosts);
+        }
     }
 }

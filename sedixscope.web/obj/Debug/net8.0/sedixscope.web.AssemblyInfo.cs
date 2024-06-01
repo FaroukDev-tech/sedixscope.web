@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("sedixscope.web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0bb0ea377ee18c7aa80d117286663a01459eae15")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bbd66ad3252d164dd610e85bd3d4ae31a20e6bad")]
 [assembly: System.Reflection.AssemblyProductAttribute("sedixscope.web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("sedixscope.web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

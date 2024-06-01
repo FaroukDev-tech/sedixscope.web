@@ -32,24 +32,26 @@
             {
                 @foreach (var blogPost in Model.BlogPosts)
                 {
-                    <div class="mb-5 bg-light box-shadow p-3">
-                        <img src="@blogPost.FeaturedImageUrl" alt="@blogPost.Heading">
-                        <h2 class="mb-4">@blogPost.Heading</h2>
-                        <p class="mb-4">
-                            Author: @blogPost.Author
-                            <br/>
-                            Published Date: @blogPost.DatePublished.ToShortDateString()
-                        </p>
+                    <div class="card bg-light box-shadow p-2 mb-5">
+                        <img src="@blogPost.FeaturedImageUrl" class="card-img-top img-fluid" style="max-height: 580px;" alt="@blogPost.Heading">
+                        <div class="card-body">
+                            <h2 class="mb-4">@blogPost.Heading</h2>
+                            <p class="mb-4">
+                                Author: @blogPost.Author
+                                <br/>
+                                Published Date: @blogPost.DatePublished.ToShortDateString()
+                            </p>
 
-                        <p class="mb-4">
-                            @foreach (var tag in blogPost.Tags)
-                            {
-                                <span class="badge bg-secondaryme-1">@tag.Name</span>
-                            }
-                        </p>
+                            <p class="mb-4">
+                                @foreach (var tag in blogPost.Tags)
+                                {
+                                    <span class="badge bg-secondary me-1">@tag.Name</span>
+                                }
+                            </p>
 
-                        <p class="mb-4">@blogPost.ShortDescription</p>
-                        <a class="btn btn-dark" asp-area="" asp-controller="BlogPosts" asp-action="Detail">Read more</a>
+                            <p class="mb-4">@blogPost.ShortDescription</p>
+                                <a class="btn btn-dark" asp-area="" asp-controller="BlogPosts" asp-action="Detail">Read more</a>
+                        </div>
                     </div>
                 }
             }
