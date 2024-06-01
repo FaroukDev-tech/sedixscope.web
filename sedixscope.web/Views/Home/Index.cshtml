@@ -50,7 +50,7 @@
                             </p>
 
                             <p class="mb-4">@blogPost.ShortDescription</p>
-                                <a class="btn btn-dark" asp-area="" asp-controller="BlogPosts" asp-action="Detail">Read more</a>
+                                <a class="btn btn-dark" asp-area="" asp-controller="Blogs" asp-action="Detail" asp-route-id="@blogPost.Id">Read more</a>
                         </div>
                     </div>
                 }

@@ -26,7 +26,7 @@ namespace sedixscope.web.Controllers
             var tags = await _tagRepository.GetAllAsync();
             var model = new AddBlogPostRequest
             {
-                Tags = tags.Select(x => new SelectListItem {Value = x.Name, Text = x.DisplayName})
+                Tags = tags.Select(x => new SelectListItem {Value = x.Id.ToString(), Text = x.Name})
             };
 
             return View(model);
@@ -74,6 +74,92 @@ namespace sedixscope.web.Controllers
             var blogPosts = await _blogPostRepository.GetAllAsync();
 
             return View(blogPosts);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var existingBlogPost = await _blogPostRepository.GetByIdAsync(id);
+            var allTags = await _tagRepository.GetAllAsync();
+
+            if (existingBlogPost != null)
+            {
+                var editBlogPost = new EditBlogPostRequest
+                {
+                    Id = existingBlogPost.Id,
+                    Heading = existingBlogPost.Heading,
+                    Content = existingBlogPost.Content,
+                    ShortDescription = existingBlogPost.ShortDescription,
+                    FeaturedImageUrl = existingBlogPost.FeaturedImageUrl,
+                    UrlHandle = existingBlogPost.UrlHandle,
+                    Author = existingBlogPost.Author,
+                    Visible = existingBlogPost.Visible,
+                    Tags = allTags.Select(x => new SelectListItem
+                    {
+                        Text = x.Name,
+                        Value = x.Id.ToString()
+                    }),
+                    SelectedTags = existingBlogPost.Tags.Select(x => x.Id.ToString()).ToArray()
+                };
+
+                return View(editBlogPost);
+            }
+
+            return View(null);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditBlogPostRequest editBlogPostRequest)
+        {
+            var existingBlogPost = await _blogPostRepository.GetByIdAsync(editBlogPostRequest.Id);
+
+            if (existingBlogPost != null)
+            {
+                var blogPost = new BlogPost
+                {
+                    Id = editBlogPostRequest.Id,
+                    Heading = editBlogPostRequest.Heading,
+                    Content = editBlogPostRequest.Content,
+                    ShortDescription = editBlogPostRequest.ShortDescription,
+                    FeaturedImageUrl = editBlogPostRequest.FeaturedImageUrl,
+                    UrlHandle = editBlogPostRequest.UrlHandle,
+                    Author = editBlogPostRequest.Author,
+                    Visible = editBlogPostRequest.Visible,
+                };
+
+                var selectedTags = new List<Tag>();
+
+                foreach (var tag in editBlogPostRequest.SelectedTags)
+                {
+                    var selectedTagIdAsGuid = Guid.Parse(tag);
+                    var selectedTag = await _tagRepository.GetAsync(selectedTagIdAsGuid);
+
+                    if (selectedTag != null)
+                    {
+                        selectedTags.Add(selectedTag);
+                    }
+                }
+
+                blogPost.Tags = selectedTags;
+
+                await _blogPostRepository.UpdateAsync(blogPost);
+
+                return RedirectToAction("List");
+            }
+
+            return View();
+        }
+
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var deletedPost = await _blogPostRepository.DeleteAsync(id);
+
+            if (deletedPost==null)
+            {
+                return View(null);
+            }
+
+            return RedirectToAction("List");
         }
     }
 }

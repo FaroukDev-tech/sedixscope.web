@@ -1,0 +1,113 @@
+@model sedixscope.web.Models.ViewModels.EditBlogPostRequest
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Update Blog Post - Admin Functionality</h1>
+    </div>
+</div>
+
+<div class="container py-5">
+    @if (Model != null)
+    {
+        <form method="post" >
+            <div class="mb-3">
+                <label for="" class="form-label">Id</label>
+                <input type="text" class="form-control" id="id" asp-for="Id" readonly/>
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label">Heading</label>
+                <input type="text" class="form-control" id="heading" asp-for="Heading"/>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Page Title</label>
+                <input type="text" class="form-control" id="pageTitle" asp-for="PageTitle"/>
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label">Content</label>
+                <textarea id="content" class="form-control" asp-for="Content"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label">Short Description</label>
+                <input type="text" class="form-control" id="shortDescription" asp-for="ShortDescription"/>
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label">Featured Image</label>
+                <input type="file" class="form-control" id="featuredImage"/>
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label">Featured Image Url</label>
+                <input type="text" class="form-control" id="featuredImageUrl" asp-for="FeaturedImageUrl"/>
+                <img src="" alt="" id="featuredImageDisplay" style="display: none; width: 300px">
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label">Url Handle</label>
+                <input type="text" class="form-control" id="urlHandle" asp-for="UrlHandle"/>
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label">Author</label>
+                <input type="text" class="form-control" id="author" asp-for="Author"/>
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label">Tags</label>
+                <select class="form-select" id="tags" asp-items="@Model.Tags" asp-for="SelectedTags">
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label me-1">Visible?</label>
+                <input type="checkbox" class="form-check-input" id="visible" checked asp-for="Visible"/>
+            </div>
+
+            <div class="mt-3 d-flex">
+                <button type="submit" class="btn btn-dark">Save Changes</button>
+                <button type="submit" class="btn btn-danger ms-3" asp-area="" asp-controller="AdminBlogs" asp-action="Delete">Delete</button>
+            </div>
+        </form>
+    }
+    else
+    {
+        <p>Blog post not found!</p>
+    }
+</div>
+
+@section Scripts
+{
+    <script>
+        var editor = new FroalaEditor("#content", {
+            imageUploadURL: '/api/images'
+        });
+
+        const featuredUploadElement = document.getElementById("featuredImage");
+        const featuredImageUrlElement = document.getElementById("featuredImageUrl");
+        const featuredImageDisplayElement = document.getElementById("featuredImageDisplay");
+
+        async function uploadFeaturedImage(e){
+            let data = new FormData();
+            data.append('file', e.target.files[0]);
+
+            await fetch('/api/images', {
+                method: 'POST',
+                headers: {
+                    'Accept': '*/*',
+                },
+                body: data
+            }).then(response => response.json())
+                .then(result => {
+                    featuredImageUrlElement.value = result.link;
+                    featuredImageDisplayElement.src = result.link;
+                    featuredImageDisplayElement.style.display = "block";
+                });
+        }
+
+        featuredUploadElement.addEventListener('change', uploadFeaturedImage);
+    </script>
+}
