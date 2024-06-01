@@ -1,0 +1,38 @@
+@model List<sedixscope.web.Models.Domain.Tag>
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container-fluid">
+        <h1>All Tags - Admin Functionality</h1>
+    </div>
+</div>
+
+<div class="container py-5">
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Display Name</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tag in Model)
+                {
+                    <tr>
+                        <th scope="row">@tag.Id</th>
+                        <td>@tag.Name</td>
+                        <td>@tag.DisplayName</td>
+                        <td><a href="">Edit</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else 
+    {
+        <p>No tags created yet!</p>
+    }
+</div>
