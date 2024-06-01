@@ -103,3 +103,5 @@ C:\Users\user\Desktop\Projects\SedixScopeMVC\sedixscope.web\bin\Debug\net8.0\zh-
 C:\Users\user\Desktop\Projects\SedixScopeMVC\sedixscope.web\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\user\Desktop\Projects\SedixScopeMVC\sedixscope.web\obj\Debug\net8.0\sedixscope.web.csproj.AssemblyReference.cache
 C:\Users\user\Desktop\Projects\SedixScopeMVC\sedixscope.web\obj\Debug\net8.0\sedixsco.95F8F172.Up2Date
+C:\Users\user\Desktop\Projects\SedixScopeMVC\sedixscope.web\bin\Debug\net8.0\CloudinaryDotNet.dll
+C:\Users\user\Desktop\Projects\SedixScopeMVC\sedixscope.web\bin\Debug\net8.0\Newtonsoft.Json.dll

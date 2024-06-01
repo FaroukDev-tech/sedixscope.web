@@ -13,6 +13,7 @@ builder.Services.AddDbContext<SedixDbContext>(options =>
 
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
+builder.Services.AddScoped<IImagesRepository, CloudinaryImageRepository>();
 
 var app = builder.Build();
 

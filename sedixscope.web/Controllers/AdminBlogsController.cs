@@ -43,7 +43,7 @@ namespace sedixscope.web.Controllers
                 ShortDescription = addBlogPostRequest.ShortDescription,
                 FeaturedImageUrl = addBlogPostRequest.FeaturedImageUrl,
                 UrlHandle = addBlogPostRequest.UrlHandle,
-                DatePublished = addBlogPostRequest.DatePublished,
+                DatePublished = DateTime.UtcNow,
                 Author = addBlogPostRequest.Author,
                 Visible = addBlogPostRequest.Visible
             };

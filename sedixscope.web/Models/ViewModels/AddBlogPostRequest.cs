@@ -15,7 +15,6 @@ namespace sedixscope.web.Models.ViewModels
         public string ShortDescription { get; set; }
         public string FeaturedImageUrl { get; set; }
         public string UrlHandle { get; set; }
-        public DateTime DatePublished { get; set; }
         public string Author { get; set; }
         public bool Visible { get; set; }
 
