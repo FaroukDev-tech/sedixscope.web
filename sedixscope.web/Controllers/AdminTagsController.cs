@@ -47,5 +47,47 @@ namespace sedixscope.web.Controllers
 
             return View(tags);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var existingTag = await _tagRepository.GetAsync(id);
+
+            if (existingTag != null)
+            {
+                var editTagRequest = new EditTagRequest
+                {
+                    Id = existingTag.Id,
+                    Name = existingTag.Name,
+                    DisplayName = existingTag.DisplayName
+                };
+
+                return View(editTagRequest);
+            }
+            
+            return View(null);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditTagRequest editTagRequest)
+        {
+            var existingTag = await _tagRepository.GetAsync(editTagRequest.Id);
+
+            if (existingTag != null)
+            {
+                var tag = new Tag
+                {
+                    Id = editTagRequest.Id,
+                    Name = editTagRequest.Name,
+                    DisplayName = editTagRequest.DisplayName
+                };
+
+                await _tagRepository.UpdateAsync(tag);
+
+                return RedirectToAction("List");
+            }
+
+            return View();
+        }
     }
 }
