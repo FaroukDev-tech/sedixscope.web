@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using sedixscope.web.Data;
 using sedixscope.web.Repository;
@@ -11,10 +12,18 @@ builder.Services.AddDbContext<SedixDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("SedixScopeDbConnectionString"))
 );
 
+builder.Services.AddDbContext<SedixAuthDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("SedixScopeAuthDbConnectionString"))
+);
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                    .AddEntityFrameworkStores<SedixAuthDbContext>();
+
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<IImagesRepository, CloudinaryImageRepository>();
 builder.Services.AddScoped<IBlogPostLikeRepository, BlogPostLikeRepository>();
+builder.Services.AddScoped<IBlogPostCommentRepository, BlogPostCommentRepository>();
 
 var app = builder.Build();
 
@@ -31,6 +40,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
