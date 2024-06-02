@@ -9,7 +9,7 @@ namespace sedixscope.web.Data
 {
     public class SedixDbContext : DbContext
     {
-        public SedixDbContext(DbContextOptions options) : base(options)
+        public SedixDbContext(DbContextOptions<SedixDbContext> options) : base(options)
         {
         }
 
