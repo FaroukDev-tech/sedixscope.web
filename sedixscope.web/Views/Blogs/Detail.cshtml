@@ -44,3 +44,41 @@
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+    <script>
+        var btnLikeElement = document.getElementById('btnLike');
+        var totalLikesElement = document.getElementById('totalLikes');
+
+        async function getTotalLikes(){
+            fetch('/api/BlogPostLike/@Model.Id/totalLikes', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                }
+            }).then(response => response.json())
+                .then(result => totalLikesElement.innerHTML = result);
+        }
+
+        async function addLikeForBlog(){
+            fetch('/api/BlogPostLike/Add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                },
+                body: JSON.stringify({
+                    BlogPostId: '@Model.Id',
+                })
+            }).then(()=>{
+                btnLikeElement.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i>';
+                getTotalLikes();
+                btnLikeElement.removeEventListener('click', addLikeForBlog);
+            })
+        }
+
+        btnLikeElement.addEventListener('click', addLikeForBlog);
+    </script>
+}
