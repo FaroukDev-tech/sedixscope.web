@@ -1,0 +1,27 @@
+@model sedixscope.web.Models.ViewModels.LoginViewModel
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <h1 class="mt-3 mb-3 h3">
+                Login
+            </h1>
+
+            <form action="" method="post">
+                <div class="mb-3">
+                    <label for="" class="form-label">Username</label>
+                    <input type="text" id="username" class="form-control" asp-for="Username" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-control" asp-for="Password" required>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-dark">Log In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
