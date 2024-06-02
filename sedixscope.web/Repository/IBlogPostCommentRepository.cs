@@ -9,7 +9,7 @@ namespace sedixscope.web.Repository
 {
     public interface IBlogPostCommentRepository
     {
-        Task<Comment> AddAsync(AddBlogPostComment addBlogPostComment);
+        Task<Comment> AddAsync(Comment blogComment);
         Task<IEnumerable<Comment>> GetCommentsForBlogAsync(Guid blogPostId);
     }
 }

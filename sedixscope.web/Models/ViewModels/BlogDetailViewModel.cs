@@ -18,7 +18,7 @@ namespace sedixscope.web.Models.ViewModels
         public DateTime DatePublished { get; set; }
         public string Author { get; set; }
         public ICollection<Tag> Tags { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public ICollection<BlogCommentViewModel> Comments { get; set; }
         public int TotalLikes { get; set; }
         public bool Liked { get; set; }
         public string CommentDescription { get; set; }

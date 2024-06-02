@@ -16,15 +16,8 @@ namespace sedixscope.web.Repository
         {
             _sedixDbContext = sedixDbContext;
         }
-        public async Task<Comment> AddAsync(AddBlogPostComment addBlogPostComment)
+        public async Task<Comment> AddAsync(Comment blogComment)
         {
-            var blogComment = new Comment
-            {
-                UserId = addBlogPostComment.UserId,
-                BlogPostId = addBlogPostComment.BlogPostId,
-                DateAdded = DateTime.UtcNow
-            };
-
             await _sedixDbContext.Comments.AddAsync(blogComment);
             await _sedixDbContext.SaveChangesAsync();
 
