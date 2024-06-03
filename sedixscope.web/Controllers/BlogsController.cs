@@ -73,7 +73,7 @@ namespace sedixscope.web.Controllers
                     PageTitle = blogPost.PageTitle,
                     Heading = blogPost.Heading,
                     Content = blogPost.Content,
-                    DatePublished = blogPost.DatePublished,
+                    DatePublished = DateTime.UtcNow,
                     Author = blogPost.Author,
                     FeaturedImageUrl = blogPost.FeaturedImageUrl,
                     TotalLikes = totalLikes,
