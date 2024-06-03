@@ -28,7 +28,7 @@ namespace sedixscope.web.Controllers
             {
                 BlogId = request.BlogPostId,
                 DateAdded = DateTime.UtcNow,
-                UserId = Guid.NewGuid()
+                UserId = request.UserId
             };
 
             var like = await _blogPostLikeRepository.AddLikeForBlogAsync(blogLike);

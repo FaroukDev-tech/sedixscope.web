@@ -80,6 +80,7 @@ namespace sedixscope.web.Controllers
                     ShortDescription = blogPost.ShortDescription,
                     Tags = blogPost.Tags,
                     UrlHandle = blogPost.UrlHandle,
+                    Liked = liked,
                     Comments = blogCommentsForView
                 };
 
