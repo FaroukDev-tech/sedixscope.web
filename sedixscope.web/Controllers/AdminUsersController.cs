@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using sedixscope.web.Models.ViewModels;
@@ -9,6 +10,7 @@ using sedixscope.web.Repository;
 
 namespace sedixscope.web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminUsersController : Controller
     {
         private readonly IUserRepository _userRepository;
