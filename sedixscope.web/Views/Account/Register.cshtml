@@ -10,17 +10,17 @@
             <form action="" method="post">
                 <div class="mb-3">
                     <label for="" class="form-label">Username</label>
-                    <input type="text" id="username" class="form-control" asp-for="Username" required minlength="3">
+                    <input type="text" id="username" class="form-control" asp-for="Username" asp-validation-for="Username" required minlength="3">
                 </div>
 
                 <div class="mb-3">
                     <label for="" class="form-label">Email</label>
-                    <input type="email" id="email" class="form-control" asp-for="Email" required>
+                    <input type="email" id="email" class="form-control" asp-for="Email" asp-validation-for="Email" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="" class="form-label">Password</label>
-                    <input type="password" id="password" class="form-control" asp-for="Password" required minlength="6">
+                    <input type="password" id="password" class="form-control" asp-for="Password" asp-validation-for="Password" required minlength="6">
                 </div>
 
                 <div class="mb-3">

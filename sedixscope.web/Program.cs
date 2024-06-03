@@ -19,6 +19,13 @@ builder.Services.AddDbContext<SedixAuthDbContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                     .AddEntityFrameworkStores<SedixAuthDbContext>();
 
+builder.Services.Configure<IdentityOptions> (options => 
+{
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 6;
+    options.User.RequireUniqueEmail = true;
+});
+
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<IImagesRepository, CloudinaryImageRepository>();
