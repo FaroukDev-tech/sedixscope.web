@@ -10,5 +10,7 @@ namespace sedixscope.web.Repository
     public interface IUserRepository
     {
         Task<IEnumerable<IdentityUser>> GetAllUsersAsync();
+        Task<IdentityResult> DeleteAsync(Guid userId);
+        Task<IdentityResult> AddUserAsync(IdentityUser identityUser, string password, bool isAdmin);
     }
 }

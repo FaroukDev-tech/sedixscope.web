@@ -5,12 +5,10 @@ using System.Threading.Tasks;
 
 namespace sedixscope.web.Models.ViewModels
 {
-    public class UserRequest
+    public class UserViewModel
     {
-        public List<UserViewModel> Users { get; set; }
+        public Guid Id { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
-        public bool AdminRoleCheckBox { get; set; }
     }
 }

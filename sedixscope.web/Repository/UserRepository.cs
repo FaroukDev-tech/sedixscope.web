@@ -14,11 +14,53 @@ namespace sedixscope.web.Repository
         {
             _userManager = userManager;
         }
+
+        public async Task<IdentityResult> AddUserAsync(IdentityUser identityUser, string password, bool isAdmin)
+        {
+            if (identityUser != null)
+            {
+                var identityResult = await _userManager.CreateAsync(identityUser, password);
+
+                if (identityResult != null && identityResult.Succeeded)
+                {
+                    var roles = new List<string> { "User" };
+                    
+                    if (isAdmin)
+                    {
+                        roles.Add("Admin");
+                    }
+
+                    identityResult = await _userManager.AddToRolesAsync(identityUser, roles);
+                    
+                    return identityResult;
+                }
+            }
+
+            return null;
+        }
+
+        public async Task<IdentityResult> DeleteAsync(Guid userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (user != null)
+            {
+                var identityResult = await _userManager.DeleteAsync(user);
+
+                if (identityResult.Succeeded)
+                {
+                    return identityResult;
+                }
+            }
+
+            return null;
+        }
+
         public async Task<IEnumerable<IdentityUser>> GetAllUsersAsync()
         {
-            var totalUsers =  await _userManager.Users.ToListAsync();
+            var totalUsers = await _userManager.Users.ToListAsync();
 
-            var superAdmin =  await _userManager.Users.FirstOrDefaultAsync(x => x.Email=="sadikalhanssah@gmail.com");
+            var superAdmin = await _userManager.Users.FirstOrDefaultAsync(x => x.Email == "sadikalhanssah@gmail.com");
 
             if (superAdmin != null)
             {
@@ -29,3 +71,4 @@ namespace sedixscope.web.Repository
         }
     }
 }
+
